@@ -6,8 +6,9 @@
 
 #display-container {
     display: flex;
+    flex-direction: column;
     border: 3px dashed green;
-    justify-content: end;
+    align-items: flex-end;
 }
 
 #buttons-container {

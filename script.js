@@ -1,11 +1,12 @@
 let displayValue = "";
 let historyValue = "";
+let operatorValue = "";
 
 historyDisplay = document.querySelector(".history-display");
 mainDisplay = document.querySelector(".main-display");
 
 buttons = document.querySelectorAll(".btn");
-buttons.forEach((button) => button.addEventListener("click", displayHandler));
+buttons.forEach((button) => button.addEventListener("click", handleButtons));
 
 function add(num1, num2) {
     return num1 + num2;
@@ -30,16 +31,16 @@ function clear(){}
 function operate(operator, num1, num2) {
     let result = undefined;
     switch (operator) {
-        case "add":
+        case "+":
             result = add(num1, num2);
             break;
-        case "subtract":
+        case "-":
             result = add(num1, num2);
             break;
-        case "multiply":
+        case "*":
             result = add(num1, num2);
             break;
-        case "divide":
+        case "/":
             result = add(num1, num2);
             break;
         default:
@@ -48,13 +49,16 @@ function operate(operator, num1, num2) {
     return result;
 }
 
-function displayHandler() {
+function handleButtons() {
     switch (true) {
         case this.classList.contains("num-btn"):
             displayValue += this.value;
-            mainDisplay.textContent = displayValue;
+            updateDisplay(displayValue);
             break;
         case this.classList.contains("operator-btn"):
+            historyValue = `${displayValue} ${this.value}`;
+            displayValue = "";
+            updateDisplay(displayValue, historyValue);
             break;
         case this.classList.contains("display-btn"):
             break;
@@ -64,4 +68,9 @@ function displayHandler() {
             console.log("Not num-btn");
             break;
     }
+}
+
+function updateDisplay(main=displayValue, history=historyValue) {
+    mainDisplay.textContent = main;
+    historyDisplay.textContent = history;
 }
