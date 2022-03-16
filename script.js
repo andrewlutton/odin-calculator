@@ -1,6 +1,8 @@
 let displayValue = "";
 let historyValue = "";
 let operatorValue = "";
+let firstNum = "";
+let secondNum = "";
 
 historyDisplay = document.querySelector(".history-display");
 mainDisplay = document.querySelector(".main-display");
@@ -24,27 +26,21 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
-function backspace(){}
+function backspace() { }
 
-function clear(){}
+function clear() { }
 
 function operate(operator, num1, num2) {
     let result = undefined;
     switch (operator) {
         case "+":
-            result = add(num1, num2);
-            break;
+            return add(num1, num2);
         case "-":
-            result = add(num1, num2);
-            break;
+            return subtract(num1, num2);
         case "*":
-            result = add(num1, num2);
-            break;
+            return multiply(num1, num2);
         case "/":
-            result = add(num1, num2);
-            break;
-        default:
-            break;
+            return divide(num1, num2);
     }
     return result;
 }
@@ -53,24 +49,42 @@ function handleButtons() {
     switch (true) {
         case this.classList.contains("num-btn"):
             displayValue += this.value;
-            updateDisplay(displayValue);
             break;
         case this.classList.contains("operator-btn"):
-            historyValue = `${displayValue} ${this.value}`;
+            if (!operatorValue) {
+                firstNum = +displayValue;
+                historyValue = `${displayValue} ${this.value}`;
+                displayValue = "";
+                operatorValue = this.value;
+            } else {
+                secondNum = +displayValue;
+                const result = operate(operatorValue, firstNum, secondNum);
+                
+                firstNum = result;
+                historyValue = `${result} ${this.value}`;
+                displayValue = "";
+                operatorValue = this.value; 
+            }
+            break;
+        case this.classList.contains("backspace"):
+            displayValue = displayValue.slice(0, displayValue.length - 1);
+            break;
+        case this.classList.contains("clear"):
             displayValue = "";
-            updateDisplay(displayValue, historyValue);
-            break;
-        case this.classList.contains("display-btn"):
-            break;
+            historyValue = "";
+            operatorValue = "";
+            firstNum = "";
+            secondNum = "";
         case this.classList.contains("plus-minus-btn"):
+            displayValue = String(+displayValue * -1);
             break;
-        default:
-            console.log("Not num-btn");
+        case this.classList.contains("equals"):
             break;
     }
+    updateDisplay(displayValue, historyValue);
 }
 
-function updateDisplay(main=displayValue, history=historyValue) {
-    mainDisplay.textContent = main;
-    historyDisplay.textContent = history;
+function updateDisplay(displayValue, historyValue) {
+    mainDisplay.textContent = displayValue;
+    historyDisplay.textContent = historyValue;
 }
