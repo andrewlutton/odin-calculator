@@ -5,33 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP Calculator Project</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="calculator-container">
-        <div id="display-container"></div>
+        <div id="display-container">
+            <div class="display history-display"></div>
+            <div class="display main-display"></div>
+        </div>
         <div id="buttons-container">
-            <button class="btn operator-btn backspace"><=</button>
-            <button class="btn operator-btn clear">C</button>
+            <button class="btn display-btn backspace"><=</button>
+            <button class="btn display-btn clear">C</button>
             <button class="btn operator-btn divide">/</button>
             <button class="btn operator-btn multiply">X</button>
 
-            <button class="btn num-btn num7">7</button>
-            <button class="btn num-btn num8">8</button>
-            <button class="btn num-btn num9">9</button>
+            <button class="btn num-btn num7" value="7">7</button>
+            <button class="btn num-btn num8" value="8">8</button>
+            <button class="btn num-btn num9" value="9">9</button>
             <button class="btn operator-btn subtract">-</button>
 
-            <button class="btn num-btn num4">4</button>
-            <button class="btn num-btn num5">5</button>            
-            <button class="btn num-btn num6">6</button>
+            <button class="btn num-btn num4" value="4">4</button>
+            <button class="btn num-btn num5" value="5">5</button>            
+            <button class="btn num-btn num6" value="6">6</button>
             <button class="btn operator-btn add">+</button>
 
-            <button class="btn num-btn num1">1</button>
-            <button class="btn num-btn num2">2</button>
-            <button class="btn num-btn num3">3</button>
+            <button class="btn num-btn num1" value="1">1</button>
+            <button class="btn num-btn num2" value="2">2</button>
+            <button class="btn num-btn num3" value="3">3</button>
 
-            <button class="btn num-btn num0">0</button>
-            <button class="btn num-btn decimal">.</button>
-            <button class="btn num-btn plus-minus">+/-</button>
+            <button class="btn num-btn num0" value="0">0</button>
+            <button class="btn num-btn decimal" value=".">.</button>
+            <button class="btn plus-minus-btn">+/-</button>
 
             <button class="btn equals-btn equals">=</button>
         </div>
